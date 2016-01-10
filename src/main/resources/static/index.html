@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UI - Demo - Conquerir le monde avec Fleet et CoreOs</title>
+    <script src="libs/sockjs-1.0.3.min.js"></script>
+    <script src="libs/stomp.min.js"></script>
+    <script src="libs/angular.min.js"></script>
+    <script src="js/uiFleetCoreOsCtrl.js"></script>
+
+
+    <link rel="stylesheet" type="text/css"href="./libs/bootstrap/css/bootstrap.min.css"/>
+    <link  rel="stylesheet" type="text/css" href="./libs/bootstrap/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+</head>
+<body ng-app="uiFleetCoreOs">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <h1 class="title">Conquerir le monde avec "Fleet" et "CoreOs"</h1>
+        </div>
+    </div>
+</nav>
+
+<div class="container" id="containerBody">
+    <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-lg-2">
+            <h4 class="text">CoreOs 1</h4>
+            <h4 class="text">172.20.19.1</h4>
+            <img src="images/planet1.png" class="planet"/>
+        </div>
+        <div class="col-lg-2">
+            <h4 class="text">CoreOs 2</h4>
+            <h4 class="text">172.20.19.2</h4>
+            <img src="images/planet2.png" class="planet"/>
+        </div>
+        <div class="col-lg-2">
+            <h4 class="text">CoreOs 3</h4>
+            <h4 class="text">172.20.19.3</h4>
+            <img src="images/planet3.png" class="planet"/>
+        </div>
+        <div class="col-lg-2">
+            <h4 class="text">CoreOs 4</h4>
+            <h4 class="text">172.20.19.4</h4>
+            <img src="images/planet4.png" class="planet"/>
+        </div>
+        <div class="col-lg-2">
+            <h4 class="text">CoreOs 5</h4>
+            <h4 class="text">172.20.19.5</h4>
+            <img src="images/planet5.png" class="planet"/>
+        </div>
+        <div class="col-lg-2">
+            <h4 class="text">CoreOs 6</h4>
+            <h4 class="text">172.20.19.6</h4>
+            <img src="images/planet6.png" class="planet"/>
+        </div>
+    </div>
+    <div class="row" id="dockerGroup">
+        <div class="col-lg-2">
+            <img ng-repeat="n in [1,2,3,4,5] track by $index" src="images/docker.png" class="docker">
+        </div>
+        <div class="col-lg-2">
+            <img ng-repeat="n in [1,2,3,4,5,6,7,8,9,10]  track by $index" src="images/docker.png" class="docker">
+        </div>
+        <div class="col-lg-2">
+            <img ng-repeat="n in [1,2,3]  track by $index" src="images/docker.png" class="docker">
+        </div>
+        <div class="col-lg-2">
+            <img ng-repeat="n in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]  track by $index" src="images/docker.png" class="docker">
+        </div>
+        <div class="col-lg-2">
+            <img ng-repeat="n in [1,2,3]  track by $index" src="images/docker.png" class="docker">
+        </div>
+        <div class="col-lg-2">
+            <img ng-repeat="n in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]  track by $index" src="images/docker.png" class="docker">
+        </div>
+    </div>
+
+    <div class="row" ng-controller="UiFleetCoreOsCtrl as ctrl">
+        <div class="span8 offset1">
+            <h1>Messages</h1>
+
+            <p ng-repeat="message in ctrl.messages  track by $index">{{message}}</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
