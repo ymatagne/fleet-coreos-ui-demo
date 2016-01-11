@@ -107,41 +107,54 @@
     </div>
 
     <div class="row" id="dockerGroup">
+
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
             <div ng-show="ctrl.showPlanet(ctrl.tatooine)">
-                <h4 class="text">{{ctrl.tatooine.nbrTrooper}}</h4>
-                <img data-ng-repeat="i in ctrl.range(ctrl.tatooine)" src="images/docker.png" class="docker">
+                <h4 class="text">{{ctrl.tatooine.troopers.length}}</h4>
+                <a target="_blank" data-ng-repeat="i in ctrl.range(ctrl.tatooine)" ng-href="http://{{ctrl.tatooine.troopers[i]}}">
+                    <img src="images/docker.png" class="docker">
+                </a>
             </div>
         </div>
         <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
             <div ng-show="ctrl.showPlanet(ctrl.kamino)">
-                <h4 class="text">{{ctrl.kamino.nbrTrooper}}</h4>
-                <img data-ng-repeat="i in ctrl.range(ctrl.kamino)" src="images/docker.png" class="docker">
+                <h4 class="text">{{ctrl.kamino.troopers.length}}</h4>
+                <a target="_blank" data-ng-repeat="i in ctrl.range(ctrl.kamino)" ng-href="http://{{ctrl.kamino.troopers[i]}}">
+                    <img ng src="images/docker.png" class="docker">
+                </a>
             </div>
         </div>
         <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
             <div ng-show="ctrl.showPlanet(ctrl.coruscant)">
-                <h4 class="text">{{ctrl.coruscant.nbrTrooper}}</h4>
-                <img data-ng-repeat="i in ctrl.range(ctrl.coruscant)" src="images/docker.png" class="docker">
+                <h4 class="text">{{ctrl.coruscant.troopers.length}}</h4>
+                <a target="_blank" data-ng-repeat="i in ctrl.range(ctrl.coruscant)" ng-href="http://{{ctrl.coruscant.troopers[i]}}">
+                    <img src="images/docker.png" class="docker">
+                </a>
             </div>
         </div>
         <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
             <div ng-show="ctrl.showPlanet(ctrl.naboo)">
-                <h4 class="text">{{ctrl.naboo.nbrTrooper}}</h4>
-                <img data-ng-repeat="i in ctrl.range(ctrl.naboo)" src="images/docker.png" class="docker">
+                <h4 class="text">{{ctrl.naboo.troopers.length}}</h4>
+                <a target="_blank" data-ng-repeat="i in ctrl.range(ctrl.naboo)" ng-href="http://{{ctrl.naboo.troopers[i]}}">
+                    <img src="images/docker.png" class="docker">
+                </a>
             </div>
         </div>
         <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
             <div ng-show="ctrl.showPlanet(ctrl.alderaan)">
-                <h4 class="text">{{ctrl.alderaan.nbrTrooper}}</h4>
-                <img data-ng-repeat="i in ctrl.range(ctrl.alderaan)" src="images/docker.png" class="docker">
+                <h4 class="text">{{ctrl.alderaan.troopers.length}}</h4>
+                <a target="_blank" data-ng-repeat="i in ctrl.range(ctrl.alderaan)" ng-href="http://{{ctrl.alderaan.troopers[i]}}">
+                    <img src="images/docker.png" class="docker">
+                </a>
             </div>
 
         </div>
         <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
             <div ng-show="ctrl.showPlanet(ctrl.hoth)">
-                <h4 class="text">{{ctrl.hoth.nbrTrooper}}</h4>
-                <img data-ng-repeat="i in ctrl.range(ctrl.hoth)" src="images/docker.png" class="docker">
+                <h4 class="text">{{ctrl.hoth.troopers.length}}</h4>
+                <a target="_blank" data-ng-repeat="i in ctrl.range(ctrl.hoth)" ng-href="http://{{ctrl.hoth.troopers[i]}}">
+                    <img src="images/docker.png" class="docker">
+                </a>
             </div>
 
         </div>

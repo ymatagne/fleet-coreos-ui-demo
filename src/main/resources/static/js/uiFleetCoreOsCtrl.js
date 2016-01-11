@@ -18,7 +18,7 @@ angular.module('uiFleetCoreOs', [])
             });
             $interval(function () {
                 tatooineClient.send("/app/tatooine", {});
-            }, 5000);
+            }, 2000);
         });
 
         var kamino = new SockJS('/kamino');
@@ -30,7 +30,7 @@ angular.module('uiFleetCoreOs', [])
             });
             $interval(function () {
                 kaminoClient.send("/app/kamino", {});
-            }, 5000);
+            }, 2000);
         });
 
         var coruscant = new SockJS('/coruscant');
@@ -42,7 +42,7 @@ angular.module('uiFleetCoreOs', [])
             });
             $interval(function () {
                 coruscantClient.send("/app/coruscant", {});
-            }, 5000);
+            }, 2000);
         });
 
         var naboo = new SockJS('/naboo');
@@ -54,7 +54,7 @@ angular.module('uiFleetCoreOs', [])
             });
             $interval(function () {
                 nabooClient.send("/app/naboo", {});
-            }, 5000);
+            }, 2000);
         });
 
         var alderaan = new SockJS('/alderaan');
@@ -66,7 +66,7 @@ angular.module('uiFleetCoreOs', [])
             });
             $interval(function () {
                 alderaanClient.send("/app/alderaan", {});
-            }, 5000);
+            }, 2000);
         });
 
         var hoth = new SockJS('/hoth');
@@ -78,27 +78,29 @@ angular.module('uiFleetCoreOs', [])
             });
             $interval(function () {
                 hothClient.send("/app/hoth", {});
-            }, 5000);
+            }, 2000);
         });
 
-        ctrl.range = function(planet){
+        ctrl.range = function (planet) {
             var ratings = [];
-            for (var i = 0; i < planet.nbrTrooper; i++) {
-                ratings.push(i)
+            if (planet !==null && planet.troopers !== null && planet.troopers.length > 0) {
+                for (var i = 0; i < planet.troopers.length; i++) {
+                    ratings.push(i)
+                }
             }
             return ratings;
         };
-        ctrl.showPlanet = function(planet){
-            if(planet !== undefined && planet !== null){
+        ctrl.showPlanet = function (planet) {
+            if (planet !== undefined && planet !== null) {
                 return planet.up;
-            }else{
+            } else {
                 return false;
             }
         };
-        ctrl.showDeadPlanet = function(planet){
-            if(planet !== undefined && planet !== null){
+        ctrl.showDeadPlanet = function (planet) {
+            if (planet !== undefined && planet !== null) {
                 return planet.up;
-            }else{
+            } else {
                 return true;
             }
         };
