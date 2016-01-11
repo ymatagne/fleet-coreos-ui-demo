@@ -1,6 +1,9 @@
-package hello;
+package demo.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import demo.models.Machine;
+import demo.models.Planet;
+import demo.models.Trooper;
 import lombok.extern.slf4j.Slf4j;
 import mousio.etcd4j.EtcdClient;
 import mousio.etcd4j.responses.EtcdAuthenticationException;
@@ -31,24 +34,27 @@ public class EtcdController {
 
     public EtcdController() throws IOException, TimeoutException, EtcdException {
         mapper = new ObjectMapper();
-        etcd = new EtcdClient(URI.create("http://172.17.8.101:4001"), URI.create("http://172.17.8.102:4001"), URI.create("http://172.17.8.103:4001"), URI.create("http://172.17.8.104:4001"), URI.create("http://172.17.8.105:4001"), URI.create("http://172.17.8.106:4001"));
+        connectEtcd();
+    }
+
+    private void connectEtcd() {
+        if (etcd == null) {
+            etcd = new EtcdClient(URI.create("http://172.17.8.101:4001"), URI.create("http://172.17.8.102:4001"), URI.create("http://172.17.8.103:4001"), URI.create("http://172.17.8.104:4001"), URI.create("http://172.17.8.105:4001"), URI.create("http://172.17.8.106:4001"));
+        }
     }
 
     private Planet getInfoPlanet(final String planetName) {
-        if(etcd==null){
-            etcd = new EtcdClient(URI.create("http://172.17.8.101:4001"), URI.create("http://172.17.8.102:4001"), URI.create("http://172.17.8.103:4001"), URI.create("http://172.17.8.104:4001"), URI.create("http://172.17.8.105:4001"), URI.create("http://172.17.8.106:4001"));
-        }
+        connectEtcd();
         Optional<Machine> machine = Optional.empty();
 
         Planet planet = new Planet();
 
         planet.setName(planetName);
+        planet.setUp(false);
 
         try {
-            EtcdKeysResponse response = null;
-
-            response = etcd.getDir("/_coreos.com/fleet/machines/").recursive().send().get();
-            machine = response.node.nodes.stream().filter(p -> p != null && p.nodes.size()>0).map(m -> decodeMachine(m)).filter(m -> m.getMetadata().getPlanet().equals(planetName)).findFirst();
+            EtcdKeysResponse response = etcd.getDir("/_coreos.com/fleet/machines/").recursive().send().get();
+            machine = response.node.nodes.stream().filter(p -> p != null && p.nodes.size() > 0).map(m -> decodeMachine(m)).filter(m -> m.getMetadata().getPlanet().equals(planetName)).findFirst();
 
         } catch (IOException | EtcdAuthenticationException | TimeoutException | EtcdException e) {
             log.debug("erreur", e);
@@ -57,16 +63,13 @@ public class EtcdController {
         if (machine.isPresent()) {
             planet.setUp(true);
             planet.setIp(machine.get().getPublicIP());
-            EtcdKeysResponse response = null;
             try {
-                response = etcd.get("/services/troopers/" + machine.get().getID()).recursive().send().get();
+                EtcdKeysResponse response = etcd.get("/services/troopers/" + machine.get().getID()).recursive().send().get();
                 List<Trooper> troopers = response.node.nodes.stream().map(n -> decodeTrooper(n.value)).collect(Collectors.toList());
                 troopers.stream().filter(p -> p != null).forEach(trooper -> planet.getTroopers().add(planet.getIp() + ":" + trooper.getPort()));
             } catch (IOException | EtcdException | EtcdAuthenticationException | TimeoutException e) {
                 log.debug("erreur", e);
             }
-        } else {
-            planet.setUp(false);
         }
         return planet;
     }
@@ -83,22 +86,13 @@ public class EtcdController {
 
     private Machine decodeMachine(EtcdKeysResponse.EtcdNode node) {
         try {
-            if(node.nodes.size()>0) {
+            if (node.nodes.size() > 0) {
                 return mapper.readValue(node.nodes.get(0).value, Machine.class);
             }
         } catch (IOException e) {
             log.debug("erreur dans le mapping", e);
         }
         return null;
-    }
-
-    private State decodeState(String value) {
-        try {
-            return mapper.readValue(value, State.class);
-        } catch (IOException e) {
-            log.debug("erreur dans le mapping", e);
-            return null;
-        }
     }
 
     @MessageMapping("/tatooine")
