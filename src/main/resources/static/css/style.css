@@ -2,7 +2,7 @@ body {
     background: #000 url("/images/bg.jpg");
 }
 #containerBody{
-    padding-top: 150px;
+    padding-top: 70px;
 }
 .planet{
     height: 150px;
@@ -14,7 +14,7 @@ body {
     padding-top: 50px;
 }
 .docker{
-    height: 50px;
+    height: 25px;
 }
 .title {
     color: #fff;
@@ -29,6 +29,17 @@ body {
 }
 .text {
     color: #fff;
+    font-family: "ITC Serif Gothic", Lato;
+    font-size: 1.1em;
+    left: -2em;
+    letter-spacing: 0.4em;
+    right: -2em;
+    text-align: center;
+    text-transform: uppercase;
+    top: 29%;
+}
+.textDead {
+    color: #ff0012;
     font-family: "ITC Serif Gothic", Lato;
     font-size: 1.1em;
     left: -2em;

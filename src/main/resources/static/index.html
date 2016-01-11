@@ -8,8 +8,8 @@
     <script src="js/uiFleetCoreOsCtrl.js"></script>
 
 
-    <link rel="stylesheet" type="text/css"href="./libs/bootstrap/css/bootstrap.min.css"/>
-    <link  rel="stylesheet" type="text/css" href="./libs/bootstrap/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./libs/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./libs/bootstrap/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
 </head>
 <body ng-app="uiFleetCoreOs">
@@ -22,65 +22,128 @@
     </div>
 </nav>
 
-<div class="container" id="containerBody">
+<div class="container" id="containerBody" ng-controller="UiFleetCoreOsCtrl as ctrl">
+    <div class="row">
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+            <h4 class="text">Death Star</h4>
+            <img ng-src="/images/etoilenoire.png" class="planet"/>
+        </div>
+    </div>
+
     <div class="row row-offcanvas row-offcanvas-right">
-        <div class="col-lg-2">
-            <h4 class="text">CoreOs 1</h4>
-            <h4 class="text">172.20.19.1</h4>
-            <img src="images/planet1.png" class="planet"/>
+
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.tatooine)">
+                <h4 class="text">{{ctrl.tatooine.name}}</h4>
+                <h4 class="text">{{ctrl.tatooine.ip}}</h4>
+                <img ng-src="/images/{{ctrl.tatooine.name}}.png" class="planet"/>
+            </div>
+            <div ng-show="!ctrl.showDeadPlanet(ctrl.tatooine)">
+                <h4 class="textDead">Bye</h4>
+                <h4 class="textDead">Bye</h4>
+                <img ng-src="/images/ko.gif" class="planet"/>
+            </div>
         </div>
-        <div class="col-lg-2">
-            <h4 class="text">CoreOs 2</h4>
-            <h4 class="text">172.20.19.2</h4>
-            <img src="images/planet2.png" class="planet"/>
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.kamino)">
+                <h4 class="text">{{ctrl.kamino.name}}</h4>
+                <h4 class="text">{{ctrl.kamino.ip}}</h4>
+                <img ng-src="/images/{{ctrl.kamino.name}}.png" class="planet"/>
+            </div>
+            <div ng-show="!ctrl.showDeadPlanet(ctrl.kamino)">
+                <h4 class="textDead">Bye</h4>
+                <h4 class="textDead">Bye</h4>
+                <img ng-src="/images/ko.gif" class="planet"/>
+            </div>
         </div>
-        <div class="col-lg-2">
-            <h4 class="text">CoreOs 3</h4>
-            <h4 class="text">172.20.19.3</h4>
-            <img src="images/planet3.png" class="planet"/>
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.coruscant)">
+                <h4 class="text">{{ctrl.coruscant.name}}</h4>
+                <h4 class="text">{{ctrl.coruscant.ip}}</h4>
+                <img ng-src="/images/{{ctrl.coruscant.name}}.png" class="planet"/>
+            </div>
+            <div ng-show="!ctrl.showDeadPlanet(ctrl.coruscant)">
+                <h4 class="textDead">Bye</h4>
+                <h4 class="textDead">Bye</h4>
+                <img ng-src="/images/ko.gif" class="planet"/>
+            </div>
         </div>
-        <div class="col-lg-2">
-            <h4 class="text">CoreOs 4</h4>
-            <h4 class="text">172.20.19.4</h4>
-            <img src="images/planet4.png" class="planet"/>
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.naboo)">
+                <h4 class="text">{{ctrl.naboo.name}}</h4>
+                <h4 class="text">{{ctrl.naboo.ip}}</h4>
+                <img ng-src="/images/{{ctrl.naboo.name}}.png" class="planet"/>
+            </div>
+            <div ng-show="!ctrl.showDeadPlanet(ctrl.naboo)">
+                <h4 class="textDead">Bye</h4>
+                <h4 class="textDead">Bye</h4>
+                <img ng-src="/images/ko.gif" class="planet"/>
+            </div>
         </div>
-        <div class="col-lg-2">
-            <h4 class="text">CoreOs 5</h4>
-            <h4 class="text">172.20.19.5</h4>
-            <img src="images/planet5.png" class="planet"/>
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.alderaan)">
+                <h4 class="text">{{ctrl.alderaan.name}}</h4>
+                <h4 class="text">{{ctrl.alderaan.ip}}</h4>
+                <img ng-src="/images/{{ctrl.alderaan.name}}.png" class="planet"/>
+            </div>
+            <div ng-show="!ctrl.showDeadPlanet(ctrl.alderaan)">
+                <h4 class="textDead">Bye</h4>
+                <h4 class="textDead">Bye</h4>
+                <img ng-src="/images/ko.gif" class="planet"/>
+            </div>
         </div>
-        <div class="col-lg-2">
-            <h4 class="text">CoreOs 6</h4>
-            <h4 class="text">172.20.19.6</h4>
-            <img src="images/planet6.png" class="planet"/>
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.hoth)">
+                <h4 class="text">{{ctrl.hoth.name}}</h4>
+                <h4 class="text">{{ctrl.hoth.ip}}</h4>
+                <img ng-src="/images/{{ctrl.hoth.name}}.png" class="planet"/>
+            </div>
+            <div ng-show="!ctrl.showDeadPlanet(ctrl.hoth)">
+                <h4 class="textDead">Bye</h4>
+                <h4 class="textDead">Bye</h4>
+                <img ng-src="/images/ko.gif" class="planet"/>
+            </div>
         </div>
     </div>
+
     <div class="row" id="dockerGroup">
-        <div class="col-lg-2">
-            <img ng-repeat="n in [1,2,3,4,5] track by $index" src="images/docker.png" class="docker">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.tatooine)">
+                <h4 class="text">{{ctrl.tatooine.nbrTrooper}}</h4>
+                <img data-ng-repeat="i in ctrl.range(ctrl.tatooine)" src="images/docker.png" class="docker">
+            </div>
         </div>
-        <div class="col-lg-2">
-            <img ng-repeat="n in [1,2,3,4,5,6,7,8,9,10]  track by $index" src="images/docker.png" class="docker">
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.kamino)">
+                <h4 class="text">{{ctrl.kamino.nbrTrooper}}</h4>
+                <img data-ng-repeat="i in ctrl.range(ctrl.kamino)" src="images/docker.png" class="docker">
+            </div>
         </div>
-        <div class="col-lg-2">
-            <img ng-repeat="n in [1,2,3]  track by $index" src="images/docker.png" class="docker">
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.coruscant)">
+                <h4 class="text">{{ctrl.coruscant.nbrTrooper}}</h4>
+                <img data-ng-repeat="i in ctrl.range(ctrl.coruscant)" src="images/docker.png" class="docker">
+            </div>
         </div>
-        <div class="col-lg-2">
-            <img ng-repeat="n in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]  track by $index" src="images/docker.png" class="docker">
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.naboo)">
+                <h4 class="text">{{ctrl.naboo.nbrTrooper}}</h4>
+                <img data-ng-repeat="i in ctrl.range(ctrl.naboo)" src="images/docker.png" class="docker">
+            </div>
         </div>
-        <div class="col-lg-2">
-            <img ng-repeat="n in [1,2,3]  track by $index" src="images/docker.png" class="docker">
-        </div>
-        <div class="col-lg-2">
-            <img ng-repeat="n in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]  track by $index" src="images/docker.png" class="docker">
-        </div>
-    </div>
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.alderaan)">
+                <h4 class="text">{{ctrl.alderaan.nbrTrooper}}</h4>
+                <img data-ng-repeat="i in ctrl.range(ctrl.alderaan)" src="images/docker.png" class="docker">
+            </div>
 
-    <div class="row" ng-controller="UiFleetCoreOsCtrl as ctrl">
-        <div class="span8 offset1">
-            <h1>Messages</h1>
+        </div>
+        <div class="col-xs-2  col-sm-2 col-md-2 col-lg-2">
+            <div ng-show="ctrl.showPlanet(ctrl.hoth)">
+                <h4 class="text">{{ctrl.hoth.nbrTrooper}}</h4>
+                <img data-ng-repeat="i in ctrl.range(ctrl.hoth)" src="images/docker.png" class="docker">
+            </div>
 
-            <p ng-repeat="message in ctrl.messages  track by $index">{{message}}</p>
         </div>
     </div>
 </div>

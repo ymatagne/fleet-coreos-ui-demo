@@ -1,19 +1,106 @@
 angular.module('uiFleetCoreOs', [])
-    .controller('UiFleetCoreOsCtrl', function($interval) {
+    .controller('UiFleetCoreOsCtrl', function ($interval) {
         var ctrl = this;
-        ctrl.messages = [];
+        ctrl.tatooine = null;
+        ctrl.kamino = null;
+        ctrl.coruscant = null;
+        ctrl.naboo = null;
+        ctrl.alderaan = null;
+        ctrl.hoth = null;
 
 
-        var socket = new SockJS('/etcd');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function(frame) {
+        var tatooine = new SockJS('/tatooine');
+        tatooineClient = Stomp.over(tatooine);
+        tatooineClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/traffic/planets', function(planet){
-                ctrl.messages.push(JSON.parse(planet.body).name);
+            tatooineClient.subscribe('/planets/tatooine', function (planet) {
+                ctrl.tatooine = JSON.parse(planet.body);
             });
-            $interval(function(){
-                stompClient.send("/app/etcd", {});
+            $interval(function () {
+                tatooineClient.send("/app/tatooine", {});
             }, 5000);
         });
+
+        var kamino = new SockJS('/kamino');
+        kaminoClient = Stomp.over(kamino);
+        kaminoClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            kaminoClient.subscribe('/planets/kamino', function (planet) {
+                ctrl.kamino = JSON.parse(planet.body);
+            });
+            $interval(function () {
+                kaminoClient.send("/app/kamino", {});
+            }, 5000);
+        });
+
+        var coruscant = new SockJS('/coruscant');
+        coruscantClient = Stomp.over(coruscant);
+        coruscantClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            coruscantClient.subscribe('/planets/coruscant', function (planet) {
+                ctrl.coruscant = JSON.parse(planet.body);
+            });
+            $interval(function () {
+                coruscantClient.send("/app/coruscant", {});
+            }, 5000);
+        });
+
+        var naboo = new SockJS('/naboo');
+        nabooClient = Stomp.over(naboo);
+        nabooClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            nabooClient.subscribe('/planets/naboo', function (planet) {
+                ctrl.naboo = JSON.parse(planet.body);
+            });
+            $interval(function () {
+                nabooClient.send("/app/naboo", {});
+            }, 5000);
+        });
+
+        var alderaan = new SockJS('/alderaan');
+        alderaanClient = Stomp.over(alderaan);
+        alderaanClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            alderaanClient.subscribe('/planets/alderaan', function (planet) {
+                ctrl.alderaan = JSON.parse(planet.body);
+            });
+            $interval(function () {
+                alderaanClient.send("/app/alderaan", {});
+            }, 5000);
+        });
+
+        var hoth = new SockJS('/hoth');
+        hothClient = Stomp.over(hoth);
+        hothClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            hothClient.subscribe('/planets/hoth', function (planet) {
+                ctrl.hoth = JSON.parse(planet.body);
+            });
+            $interval(function () {
+                hothClient.send("/app/hoth", {});
+            }, 5000);
+        });
+
+        ctrl.range = function(planet){
+            var ratings = [];
+            for (var i = 0; i < planet.nbrTrooper; i++) {
+                ratings.push(i)
+            }
+            return ratings;
+        };
+        ctrl.showPlanet = function(planet){
+            if(planet !== undefined && planet !== null){
+                return planet.up;
+            }else{
+                return false;
+            }
+        };
+        ctrl.showDeadPlanet = function(planet){
+            if(planet !== undefined && planet !== null){
+                return planet.up;
+            }else{
+                return true;
+            }
+        };
 
     });

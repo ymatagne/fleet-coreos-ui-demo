@@ -9,5 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor()
 public class Planet {
     private String name;
+    private String ip;
+    private int nbrTrooper;
+    private boolean up;
 }
 
