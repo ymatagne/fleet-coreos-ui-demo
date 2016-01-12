@@ -8,6 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @Slf4j
 public class Trooper {
-    public String ID_Machine;
+    public String loadState;
+    public String loaded;
+    public String activeState;
+    public String subState;
+    public Machine machineState;
+    public String unitHash;
     public String port;
 }

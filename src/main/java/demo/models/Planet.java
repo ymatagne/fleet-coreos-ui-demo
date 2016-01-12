@@ -11,6 +11,7 @@ import java.util.List;
 public class Planet {
     private String name;
     private String ip;
+    private String id;
     private List<String> troopers;
     private boolean up;
     public Planet(){

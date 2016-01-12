@@ -63,10 +63,11 @@ public class EtcdController {
         if (machine.isPresent()) {
             planet.setUp(true);
             planet.setIp(machine.get().getPublicIP());
+            planet.setId(machine.get().getID());
             try {
-                EtcdKeysResponse response = etcd.get("/services/troopers/" + machine.get().getID()).recursive().send().get();
-                List<Trooper> troopers = response.node.nodes.stream().map(n -> decodeTrooper(n.value)).collect(Collectors.toList());
-                troopers.stream().filter(p -> p != null).forEach(trooper -> planet.getTroopers().add(planet.getIp() + ":" + trooper.getPort()));
+                EtcdKeysResponse response = etcd.get("/_coreos.com/fleet/state").recursive().send().get();
+                List<Trooper> troopers = response.node.nodes.stream().map(n -> decodeTrooper(n.value,n.key)).collect(Collectors.toList());
+                troopers.stream().filter(p -> p != null && p.getSubState().equals("running") && p.getMachineState().getID().equals(planet.getId())).forEach(trooper -> planet.getTroopers().add(planet.getIp() + ":" + trooper.getPort()));
             } catch (IOException | EtcdException | EtcdAuthenticationException | TimeoutException e) {
                 log.debug("erreur", e);
             }
@@ -74,9 +75,11 @@ public class EtcdController {
         return planet;
     }
 
-    private Trooper decodeTrooper(String value) {
+    private Trooper decodeTrooper(String value, String key) {
         try {
-            return mapper.readValue(value, Trooper.class);
+            Trooper trooper = mapper.readValue(value, Trooper.class);
+            trooper.setPort("490"+key.split("@")[1].split("\\.")[0]);
+            return trooper;
         } catch (IOException e) {
             log.debug("erreur dans le mapping", e);
             return null;
