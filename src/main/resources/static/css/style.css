@@ -4,6 +4,17 @@ body {
 #containerBody{
     padding-top: 70px;
 }
+.textNamePodium{
+    text-align: center;
+}
+
+.ngdialog-content{width :800px !important;}
+.podiumPerso{
+    height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 .planet{
     height: 150px;
     display: block;
@@ -37,6 +48,16 @@ body {
     text-align: center;
     text-transform: uppercase;
     top: 29%;
+}
+.textInPopin{
+    color: #fff;
+    font-family: "ITC Serif Gothic", Lato;
+    font-size: 1em;
+    left: -2em;
+    letter-spacing: 0.4em;
+    right: -2em;
+    text-align: center;
+    text-transform: uppercase;
 }
 .textDead {
     color: #ff0012;

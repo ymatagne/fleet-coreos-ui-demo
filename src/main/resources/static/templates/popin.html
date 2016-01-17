@@ -1,0 +1,41 @@
+<div class="dialog-contents popinBackground" ng-controller="PopinCtrl as ctrl">
+    <div class="row">
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+            <h3 class="textInPopin">The troopers games</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Troopers" ng-model="ctrl.nbrTroopers">
+
+                <div class="input-group-btn">
+                    <button type="button" ng-click="ctrl.random()" class="btn btn-default" aria-label="Get Troopers">
+                        <span class="glyphicon glyphicon-refresh"></span></button>
+                    <button type="button" ng-click="ctrl.validate()" class="btn btn-default" aria-label="Validate"><span
+                            class="glyphicon glyphicon-ok"></span></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+            <h3 class="textInPopin">The trooper of the night: <span
+                    class="label label-default">{{ctrl.randomTrooper}}</span></h3>
+        </div>
+        <div class="row">
+            <div class="col-xs-4  col-sm-4 col-md-4 col-lg-4">
+                <img ng-show="ctrl.second" ng-src="/images/docker.png" class="podiumPerso"/>
+
+                <h3 ng-show="ctrl.second" class="textNamePodium">Second : <span class="label label-success">{{ctrl.second}}</span></h3>
+            </div>
+            <div class="col-xs-4  col-sm-4 col-md-4 col-lg-4">
+                <img ng-show="ctrl.first" ng-src="/images/first.png" class="podiumPerso"/>
+
+                <h3 ng-show="ctrl.first" class="textNamePodium">First : <span class="label label-success">{{ctrl.first}}</span></h3>
+            </div>
+            <div class="col-xs-4  col-sm-4 col-md-4 col-lg-4">
+                <img ng-show="ctrl.third" ng-src="/images/docker.png" class="podiumPerso"/>
+
+                <h3 ng-show="ctrl.third" class="textNamePodium">Third : <span class="label label-success">{{ctrl.third}}</span></h3>
+            </div>
+        </div>
+    </div>

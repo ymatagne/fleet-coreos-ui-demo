@@ -1,5 +1,5 @@
-angular.module('uiFleetCoreOs', [])
-    .controller('UiFleetCoreOsCtrl', function ($interval) {
+angular.module('uiFleetCoreOs.uiFleetCoreOsCtrl', ['ngDialog'])
+    .controller('UiFleetCoreOsCtrl', function ($interval,ngDialog) {
         var ctrl = this;
         ctrl.tatooine = null;
         ctrl.kamino = null;
@@ -105,4 +105,10 @@ angular.module('uiFleetCoreOs', [])
             }
         };
 
+        ctrl.openPopin = function(){
+            ngDialog.open({
+                template: 'templates/popin.html',
+                className: 'ngdialog-theme-plain'
+            });
+        };
     });

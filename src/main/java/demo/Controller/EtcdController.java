@@ -66,7 +66,7 @@ public class EtcdController {
             planet.setId(machine.get().getID());
             try {
                 EtcdKeysResponse response = etcd.get("/_coreos.com/fleet/state").recursive().send().get();
-                List<Trooper> troopers = response.node.nodes.stream().filter(n -> Boolean.TRUE.equals(n.key.matches("/_coreos.com/fleet/state/trooper@[1-9][1-9]\\.service"))).map(n -> decodeTrooper(n.value, n.key)).collect(Collectors.toList());
+                List<Trooper> troopers = response.node.nodes.stream().filter(n -> Boolean.TRUE.equals(n.key.matches("/_coreos.com/fleet/state/trooper@[0-9][0-9]\\.service"))).map(n -> decodeTrooper(n.value, n.key)).collect(Collectors.toList());
                 troopers.stream().filter(p -> p != null && p.getSubState().equals("running") && p.getMachineState().getID().equals(planet.getId())).forEach(trooper -> planet.getTroopers().add(planet.getIp() + ":" + trooper.getPort()));
             } catch (IOException | EtcdException | EtcdAuthenticationException | TimeoutException e) {
                 log.debug("erreur", e);
